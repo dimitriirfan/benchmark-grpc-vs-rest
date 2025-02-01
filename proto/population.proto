@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package population;
+
+option go_package = "github.com/dimitriirfan/benchmark-grpc-vs-rest-server/proto";
+
+// Population service definition
+service PopulationService {
+  // GetPopulation returns a list of all people
+  rpc GetPopulation(GetPopulationRequest) returns (GetPopulationResponse) {}
+  rpc GetPopulationRaw(GetPopulationRequest) returns (RawResponse) {}
+}
+
+// GetPopulationRequest is empty since we're getting all population
+message GetPopulationRequest {}
+
+// GetPopulationResponse contains the list of people
+message GetPopulationResponse {
+  repeated Person population = 1;
+}
+
+// RawResponse contains raw data
+message RawResponse {
+  bytes data = 1;
+}
+
+// Person represents an individual's data
+message Person {
+  string id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string email = 4;
+  string date_of_birth = 5; // RFC3339/ISO8601 format
+  string phone_number = 6;
+  Address address = 7;
+  string created_at = 8; // RFC3339/ISO8601 format
+  string updated_at = 9; // RFC3339/ISO8601 format
+  bool active = 10;
+  string role = 11;
+  string profile_image = 12;
+  map<string, Value> preferences = 13;
+}
+
+// Address represents a physical location
+message Address {
+  string street = 1;
+  string city = 2;
+  string state = 3;
+  string country = 4;
+  string postal_code = 5;
+}
+
+// Value represents a dynamic value type for preferences
+message Value {
+  oneof kind {
+    string string_value = 1;
+    bool bool_value = 2;
+    int64 int_value = 3;
+    double double_value = 4;
+  }
+}
