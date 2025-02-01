@@ -14,6 +14,20 @@ The benchmark focuses on:
 
 ## Results
 
+### Latency
+
+![Latency Comparison](./output/latency.png)
+
+The benchmark results show that gRPC consistently outperforms REST across all payload sizes, with approximately 25% lower latency compared to REST. When using raw gRPC (without additional processing), the performance advantage increases to over 60% improvement in latency.
+
+
+### Response Size
+
+![Latency Comparison](./output/response-size.png)
+
+The benchmark demonstrates that gRPC with Protocol Buffers achieves approximately 43% smaller response sizes compared to REST with JSON across all payload sizes. This reduction in message size contributes to improved network efficiency and reduced bandwidth consumption.
+
+
 ## Project Structure
 
 - `proto/`: Contains Protocol Buffer definitions
